@@ -1,10 +1,17 @@
 {
   "name": "reanimer",
+  "version": "0.0.0-alpha",
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "tsc"
   },
   "devDependencies": {
     "typescript": "^4.7.3"
+  },
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "prettier": "^2.7.1"
   }
 }
