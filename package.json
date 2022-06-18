@@ -19,6 +19,7 @@
     "index.js"
   ],
   "dependencies": {
+    "node-html-parser": "^5.3.3",
     "prettier": "^2.7.1"
   }
 }
