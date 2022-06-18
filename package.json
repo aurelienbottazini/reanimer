@@ -3,12 +3,16 @@
   "version": "0.0.0-alpha",
   "packageManager": "yarn@3.2.1",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.2",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.18.0",
+    "jest": "^28.1.1",
+    "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
   },
   "files": [
