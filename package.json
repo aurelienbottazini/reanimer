@@ -1,6 +1,9 @@
 {
   "name": "reanimer",
   "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "typescript": "^4.7.3"
   }
