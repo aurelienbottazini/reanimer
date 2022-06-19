@@ -1,9 +1,11 @@
 {
   "name": "reanimer",
   "version": "0.0.0-alpha",
+  "main": "./dist/index.js",
   "packageManager": "yarn@3.2.1",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
+    "clean": "tsc --build --clean",
     "test": "jest"
   },
   "devDependencies": {
@@ -16,7 +18,7 @@
     "typescript": "^4.7.4"
   },
   "files": [
-    "index.js"
+    "dist/*"
   ],
   "dependencies": {
     "node-html-parser": "^5.3.3",
