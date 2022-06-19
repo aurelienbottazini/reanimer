@@ -12,7 +12,7 @@ describe(deftemplate, () => {
     expect(template()).toEqual("<head><title>foobar</title></head>");
   });
 
-  test("advanced case", () => {
+  test("multiple transformations", () => {
     const template = deftemplate(
       "<body><article><h1></h1><ul></ul></article></body>",
       [
