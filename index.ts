@@ -1,5 +1,5 @@
-const world = "world";
+import { deftemplate } from "./src/template";
 
-export function hello(who: string = world): string {
-  return `Hello ${who}! `;
-}
+export const html = {
+  deftemplate,
+};
