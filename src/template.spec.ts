@@ -1,4 +1,5 @@
 import { deftemplate } from "./template";
+import { HTMLElement } from "node-html-parser";
 
 describe(deftemplate, () => {
   test("simple case", () => {
@@ -24,5 +25,19 @@ describe(deftemplate, () => {
     expect(template()).toEqual(
       "<body><article><h1>foobar</h1><ul><li>hello</li></ul></article></body>"
     );
+  });
+
+  test("transformation can be a function with a context", () => {
+    const template = deftemplate("<p></p>", [
+      [
+        "p",
+        (htmlElement: HTMLElement, context?: Record<string, unknown>) => {
+          if(context && typeof context.foo === 'string') {
+            htmlElement.innerHTML = context.foo;
+          }
+        },
+      ],
+    ]);
+    expect(template({ foo: "foobar" })).toEqual("<p>foobar</p>");
   });
 });
