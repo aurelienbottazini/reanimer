@@ -4,7 +4,7 @@
   "main": "./dist/index.js",
   "packageManager": "yarn@3.2.1",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tsc --project tsconfig.build.json -d",
     "clean": "tsc --build --clean",
     "test": "jest",
     "docs": "typedoc ./index.ts"
