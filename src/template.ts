@@ -1,7 +1,9 @@
 import { parse } from "node-html-parser";
 import { HTMLElement } from "node-html-parser";
 
-type mappingTransform = string | ((htmlElement: HTMLElement, context?: Record<string, unknown>) => void);
+type mappingTransform =
+  | string
+  | ((htmlElement: HTMLElement, context?: Record<string, unknown>) => void);
 
 export function deftemplate(
   htmlData: string,
@@ -21,17 +23,18 @@ export function deftemplate(
 
 function transform(
   htmlElement: HTMLElement | null,
-  mappingTransform: mappingTransform,
+  transformation: mappingTransform,
   context?: Record<string, unknown>
 ) {
   if (htmlElement === null) {
     return;
   }
 
-  if (typeof mappingTransform === "string") {
-    htmlElement.innerHTML = mappingTransform;
+  if (typeof transformation === "string") {
+    htmlElement.innerHTML = transformation;
     return;
   }
 
-  mappingTransform(htmlElement, context);
+  transformation(htmlElement, context);
+  return;
 }
