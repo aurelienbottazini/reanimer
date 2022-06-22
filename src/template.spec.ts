@@ -1,10 +1,10 @@
-import { deftemplate } from "./template";
+import { defTemplate } from "./template";
 
-describe(deftemplate, () => {
+describe(defTemplate, () => {
   test("simple case", () => {
-    expect(deftemplate).toBeInstanceOf(Function);
+    expect(defTemplate).toBeInstanceOf(Function);
 
-    const template = deftemplate("<head><title></title></head>", [
+    const template = defTemplate("<head><title></title></head>", [
       ["head title", "foobar"],
     ]);
     expect(template).toBeInstanceOf(Function);
@@ -13,7 +13,7 @@ describe(deftemplate, () => {
   });
 
   test("multiple transformations", () => {
-    const template = deftemplate(
+    const template = defTemplate(
       "<body><article><h1></h1><ul></ul></article></body>",
       [
         ["article h1", "foobar"],
@@ -27,7 +27,7 @@ describe(deftemplate, () => {
   });
 
   test("transformation can be a function with a context", () => {
-    const template = deftemplate("<p></p>", [
+    const template = defTemplate("<p></p>", [
       [
         "p",
         (htmlElement, context) => {
@@ -38,5 +38,10 @@ describe(deftemplate, () => {
       ],
     ]);
     expect(template({ foo: "foobar" })).toEqual("<p>foobar</p>");
+  });
+
+  test("transformation is not executed if node is null", () => {
+    const template = defTemplate("<p></p>", [["a", "foobar"]]);
+    expect(template()).toEqual("<p></p>");
   });
 });

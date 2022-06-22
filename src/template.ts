@@ -19,7 +19,7 @@ export type transformation =
  *
  * Each transform is a tuple consisting of a CSS selector and a transformation.
  */
-export function deftemplate(
+export function defTemplate(
   htmlData: string,
   transforms: [string, transformation][]
 ) {
