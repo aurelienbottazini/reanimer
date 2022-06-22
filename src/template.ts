@@ -1,20 +1,34 @@
 import { parse } from "node-html-parser";
 import { HTMLElement } from "node-html-parser";
 
-type mappingTransform =
+/**
+ * A transformation can be:
+ * - a string: it will replace the html at that selector in that case
+ * - a function: it will be called with the html node and the _context_
+ */
+export type transformation =
   | string
   | ((htmlElement: HTMLElement, context?: Record<string, unknown>) => void);
 
+/**
+ * Given some htmlData and a set of transforms returns a function
+ * transforming the htmlData using provided transforms.
+ *
+ * The returned function accepts a _context_ parameter that will be passed to
+ * the transformation function if provided.
+ *
+ * Each transform is a tuple consisting of a CSS selector and a transformation.
+ */
 export function deftemplate(
   htmlData: string,
-  mappings: [string, mappingTransform][]
+  transforms: [string, transformation][]
 ) {
   return (context?: Record<string, unknown>) => {
     const parsedHtml = parse(htmlData);
 
-    mappings.forEach(([selector, replacement]) => {
+    transforms.forEach(([selector, transformation]) => {
       const node = parsedHtml.querySelector(selector);
-      transform(node, replacement, context);
+      transform(node, transformation, context);
     });
 
     return parsedHtml.toString();
@@ -23,7 +37,7 @@ export function deftemplate(
 
 function transform(
   htmlElement: HTMLElement | null,
-  transformation: mappingTransform,
+  transformation: transformation,
   context?: Record<string, unknown>
 ) {
   if (htmlElement === null) {

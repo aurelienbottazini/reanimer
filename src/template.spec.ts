@@ -1,5 +1,4 @@
 import { deftemplate } from "./template";
-import { HTMLElement } from "node-html-parser";
 
 describe(deftemplate, () => {
   test("simple case", () => {
@@ -31,8 +30,8 @@ describe(deftemplate, () => {
     const template = deftemplate("<p></p>", [
       [
         "p",
-        (htmlElement: HTMLElement, context?: Record<string, unknown>) => {
-          if(context && typeof context.foo === 'string') {
+        (htmlElement, context) => {
+          if (context && typeof context.foo === "string") {
             htmlElement.innerHTML = context.foo;
           }
         },
