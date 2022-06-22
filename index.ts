@@ -1,5 +1,5 @@
-import { deftemplate } from "./src/template";
+import { defTemplate } from "./src/template";
 
 export const html = {
-  deftemplate,
+  defTemplate,
 };
