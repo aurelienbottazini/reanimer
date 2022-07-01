@@ -5,6 +5,7 @@ import { HTMLElement } from "node-html-parser";
  * A transformation can be:
  * - a string: it will replace the html at that selector in that case
  * - a function: it will be called with the html node and the _context_
+ * and is expected to have side effects on the html node
  */
 export type transformation =
   | string

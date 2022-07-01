@@ -7,7 +7,7 @@
     "build": "yarn clean && tsc --project tsconfig.build.json -d",
     "clean": "rm -rf ./dist",
     "test": "jest",
-    "docs": "typedoc ./index.ts ./src/template.ts"
+    "doc": "typedoc ./index.ts ./src/template.ts"
   },
   "devDependencies": {
     "@types/jest": "^28.1.2",
