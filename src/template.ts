@@ -19,6 +19,7 @@ export type transformation =
  * the transformation function if provided.
  *
  * Each transform is a tuple consisting of a CSS selector and a transformation.
+ * Transformations mutate the dom in place.
  */
 export function defTemplate(
   htmlData: string,
