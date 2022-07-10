@@ -1,7 +1,12 @@
 {
   "name": "reanimer",
-  "version": "0.0.0-alpha",
+  "version": "0.0.0-alpha.1",
+  "description": "A selector-based HTML templating library",
+  "homepage": "https://aurelienbottazini.github.io/reanimer/",
+  "author": "Aurélien Bottazini (https://aurelienbottazini.github.io)",
+  "license": "MIT",
   "main": "./dist/index.js",
+  "files": ["dist/*"],
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "yarn clean && tsc --project tsconfig.build.json -d",
@@ -18,9 +23,6 @@
     "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
   },
-  "files": [
-    "dist/*"
-  ],
   "dependencies": {
     "node-html-parser": "^5.3.3",
     "prettier": "^2.7.1",
