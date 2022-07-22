@@ -6,7 +6,9 @@
   "author": "Aurélien Bottazini (https://aurelienbottazini.github.io)",
   "license": "MIT",
   "main": "./dist/index.js",
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "yarn clean && tsc --project tsconfig.build.json -d",
