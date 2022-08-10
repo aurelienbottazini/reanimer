@@ -42,15 +42,13 @@ function transform(
   transformation: transformation,
   context?: Record<string, unknown>
 ) {
-  if (htmlElement === null) {
-    return;
-  }
+  if (htmlElement === null) return;
 
   if (typeof transformation === "string") {
     htmlElement.innerHTML = transformation;
-    return;
+  } else {
+    transformation(htmlElement, context);
   }
 
-  transformation(htmlElement, context);
   return;
 }
