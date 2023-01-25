@@ -19,10 +19,12 @@ jobs:
 
       - run: corepack enable
 
+      - run: npm install -g pnpm
+
       - name: Build doc 🔧
         run: |
-          npm install
-          npm run doc
+          pnpm install
+          pnpm run doc
 
       - name: Deploy doc 🚀
         uses: JamesIves/github-pages-deploy-action@v4
