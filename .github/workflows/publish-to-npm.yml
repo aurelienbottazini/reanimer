@@ -13,10 +13,11 @@ jobs:
           node-version: 16
           registry-url: "https://registry.npmjs.org"
       - run: corepack enable
-      - run: npm install
+      - run: npm install -g pnpm
+      - run: pnpm install
       - name: build 👷
-        run: npm run build
+        run: pnpm run build
       - name: publish 🚀
-        run: npm publish
+        run: pnpm publish
         env:
-          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
