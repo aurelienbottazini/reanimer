@@ -1,5 +1,3 @@
-import { HTMLElement } from "node-html-parser";
-
 /**
  * Append a child node to node as a side effect, mutating node in place.
  * @param node
