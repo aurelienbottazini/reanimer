@@ -1,4 +1,5 @@
 import { defTemplate } from "./template";
+import fs from "fs";
 
 describe(defTemplate, () => {
   test("simple case", () => {
@@ -43,5 +44,16 @@ describe(defTemplate, () => {
   test("transformation is not executed if node is null", () => {
     const template = defTemplate("<p></p>", [["a", "foobar"]]);
     expect(template()).toEqual("<p></p>");
+  });
+
+  describe("enlive tutorial", () => {
+    it("should handle template1 use case", () => {
+      const data = fs.readFileSync("./resources/test-templates/template1.html", "utf8");
+      const template = defTemplate(data, [["p#message", (node, context) => {
+        node.innerHTML = <string>context?.message;
+      }]]);
+      expect(typeof template({ message: "foo"})).toBe('string');
+      expect(template({ message: "foo"})).toContain('<p id="message">foo</p>');
+    });
   });
 });
