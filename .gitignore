@@ -4,3 +4,5 @@ index.js
 docs/
 
 coverage.yarn
+/coverage/coverage-final.json
+/coverage/coverage-summary.json

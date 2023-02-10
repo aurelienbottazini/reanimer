@@ -1,5 +1,5 @@
-import { transformation } from "./transformations";
-import { defSnippet } from "./snippet";
+import { transform, transformation } from "./transformations";
+import { parse } from "node-html-parser";
 
 /**
  * Given some htmlData and a set of transforms returns a function
@@ -16,6 +16,13 @@ export function defTemplate(
   transforms: [string, transformation][]
 ) {
   return (context?: Record<string, unknown>) => {
-    return defSnippet(htmlData, transforms)(context).toString();
+    const parsedHtml = parse(htmlData);
+
+    transforms.forEach(([selector, transformation]) => {
+      const node = parsedHtml.querySelector(selector) as HTMLElement | null;
+      transform(node, transformation, context);
+    });
+
+    return parsedHtml.toString();
   };
 }
