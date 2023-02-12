@@ -1,20 +1,39 @@
 import { transform, transformation } from "./transformations";
 import { parse } from "node-html-parser";
 
-export function defSnippet(htmlData: string, selector: string, transforms: [string, transformation][]) {
-  return (context?: Record<string, unknown>) => {
-    const parsedHtml = parse(htmlData);
-    const snippetHtml = parsedHtml.querySelector(selector) as HTMLElement | null;
+function applySelector(parsedHtml: HTMLElement | null, selector: string, transforms: [string, transformation][], context: Record<string, unknown> | undefined) {
+  const snippetHtml = parsedHtml?.querySelector(selector) as HTMLElement | null;
 
-    transforms.forEach(([selector, transformation]) => {
-      if(selector === "self") {
-        transform(snippetHtml, transformation, context);
-      } else {
-        const node = snippetHtml?.querySelector(selector) as HTMLElement | null;
-        transform(node, transformation, context);
+  transforms.forEach(([selector, transformation]) => {
+    if (selector === "self") {
+      transform(snippetHtml, transformation, context);
+    } else {
+      const node = snippetHtml?.querySelector(selector) as HTMLElement | null;
+      transform(node, transformation, context);
+    }
+  });
+
+  return snippetHtml;
+}
+
+export function defSnippet(htmlData: string, selectors: string | string[], transforms: [string, transformation][]) {
+  return (context?: Record<string, unknown>) => {
+
+    if (typeof selectors === "string") {
+      selectors = [selectors];
+    }
+
+    const parsedHtml = parse(htmlData) as unknown as HTMLElement;
+    const result : HTMLElement[] = [];
+    const snippetHtml = [];
+    selectors.forEach(selector => {
+      const snippetHtml = parsedHtml?.querySelector(selector) as HTMLElement | null;
+      const items = applySelector(parsedHtml, selector, transforms, context);
+      if (items) {
+        result.push(items);
       }
     });
 
-    return snippetHtml;
+    return result;
   };
 }

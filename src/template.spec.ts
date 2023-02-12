@@ -90,7 +90,7 @@ describe(defTemplate, () => {
         "./resources/test-templates/template2.html",
         "utf8"
       );
-      const sectionModel = defSnippet(data2, ".title", [
+      const sectionModel = defSnippet(data2, [".title", ".content:nth-of-type(1)"], [
         [
           "self",
           (node, context) => {
