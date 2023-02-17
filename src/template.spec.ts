@@ -117,6 +117,13 @@ describe(defTemplate, () => {
       expect(template({ title: "hello" })).toContain(
         '<h2 class="title">hello</h2>'
       );
+
+
+      // make sure `Array#join` is customized to concatenate without any extra character
+      expect(template({ title: "hello" })).not.toContain(
+        ','
+      );
+      template({ title: "hello" }) //?
     });
   });
 });

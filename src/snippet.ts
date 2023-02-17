@@ -36,6 +36,7 @@ export function defSnippet(htmlData: string, selectors: string | string[], trans
       }
     });
 
+    result.join = Array.prototype.join.bind(result, '');
     return result;
   };
 }
