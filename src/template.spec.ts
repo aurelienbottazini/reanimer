@@ -86,18 +86,20 @@ describe(defTemplate, () => {
         '<a target="new" href="#bar">foo</a>'
       );
 
-      const data2 = fs.readFileSync(
-        "./resources/test-templates/template2.html",
-        "utf8"
-      );
-      const sectionModel = defSnippet(data2, [".title", ".content:nth-of-type(1)"], [
+      const sectionModel = defSnippet(data, [".title", ".content:nth-of-type(1)"], [
         [
-          "self",
+          ".title",
           (node, context) => {
             node.innerHTML = <string>context?.title;
           },
         ],
+        [ ".content",
+          (node) => {
+            node.innerHTML = "hello for content";
+          }
+        ]
       ]);
+
       const sectionSnippet = sectionModel({ title: "baz" });
       expect(sectionSnippet?.toString()).toContain(
         '<h2 class="title">baz</h2>'

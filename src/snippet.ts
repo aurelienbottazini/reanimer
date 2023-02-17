@@ -8,7 +8,11 @@ function applySelector(parsedHtml: HTMLElement | null, selector: string, transfo
     if (selector === "self") {
       transform(snippetHtml, transformation, context);
     } else {
-      const node = snippetHtml?.querySelector(selector) as HTMLElement | null;
+      const wrapper = parse("<div></div>") as unknown as HTMLElement;
+      if (snippetHtml) {
+        wrapper.appendChild(snippetHtml);
+      }
+      const node = wrapper.querySelector(selector) as HTMLElement | null;
       transform(node, transformation, context);
     }
   });
@@ -25,9 +29,7 @@ export function defSnippet(htmlData: string, selectors: string | string[], trans
 
     const parsedHtml = parse(htmlData) as unknown as HTMLElement;
     const result : HTMLElement[] = [];
-    const snippetHtml = [];
     selectors.forEach(selector => {
-      const snippetHtml = parsedHtml?.querySelector(selector) as HTMLElement | null;
       const items = applySelector(parsedHtml, selector, transforms, context);
       if (items) {
         result.push(items);
